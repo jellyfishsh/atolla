@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from pathlib import Path
 from discord import app_commands
 from discord.ext import commands
+from PIL import Image
 
 def getIntents():
     intents = discord.Intents.default()
@@ -29,3 +30,4 @@ def getCommandBot():
 
 def runClient(client):
     client.run(getToken())
+

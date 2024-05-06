@@ -1,27 +1,36 @@
 import discord
+import discord.http
+import webImages
 import botData as data
 
 
 bot = data.getCommandBot()
 guild = discord.Object(id=1212566775917580398)
 
-#Slash command
-@bot.tree.command(name="hello",description="The essential command", guild=guild)
-async def hello(interaction:discord.Interaction):
-    await interaction.response.send_message("Hello World!")
-
-@bot.tree.command(name="count", description="Another interesting command", guild=guild)
-async def count(interaction:discord.Interaction, arg: int):
-    next = arg + 1
-    await interaction.response.send_message(f"Look, I can count as well! The next number is {next}")
-
 @bot.tree.command(name="duck", description="Sends a picture of a duck (or if it doesn't work, just quacks back)", guild=guild)
 async def duck(interaction:discord.Interaction):
-    await interaction.response.send_message()
+    imageurl = webImages.randomDuckImg()
+    e = discord.Embed()
+    e.set_image(url=imageurl)
+    await interaction.response.send_message(embed=e)
+
+@bot.tree.command(name="bunny", description="Sends a picture of a bunny or rabbit!", guild=guild)
+async def bunny(interaction:discord.Interaction):
+    imagedict = webImages.randomBunnyGif()
+    imagemedia = imagedict["media"]
+    e = discord.Embed(title="Here is a cute rabbit!")
+    e.set_image(url=imagemedia["gif"])
+    e.set_thumbnail(url=imagemedia["poster"])
+    e.set_author(name=f"Source: {imagedict["source"]}. API by https://www.bunnies.io/")
+    await interaction.response.send_message(embed=e)
 
 @bot.tree.command(name="ping", description="Sends the bot's latency.", guild=guild)
 async def ping(interaction:discord.Interaction):
-    await interaction.response.send_message(f"Pong! Latency is {bot.latency}")
+    await interaction.response.send_message(f"Pong! Latency is {bot.latency * 1000} ms")
+
+
+
+
 
 
 #Events
