@@ -15,6 +15,17 @@ async def count(interaction:discord.Interaction, arg: int):
     next = arg + 1
     await interaction.response.send_message(f"Look, I can count as well! The next number is {next}")
 
+@bot.tree.command(name="duck", description="Sends a picture of a duck (or if it doesn't work, just quacks back)")
+async def duck(interaction:discord.Interaction):
+
+
+
+    await interaction.response.send_message()
+
+@bot.tree.command(name="ping", description="Sends the bot's latency.")
+async def ping(interaction:discord.Interaction):
+    await interaction.response.send_message(f"Pong! Latency is {bot.latency}")
+
 
 #Events
 @bot.event
