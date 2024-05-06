@@ -26,8 +26,6 @@ def getToken():
 def getCommandBot():
     return commands.Bot(command_prefix=".",intents=getIntents())
 
-def getPersonalGuild():
-    return discord.Object(id=1212566775917580398)
 
 def runClient(client):
     client.run(getToken())

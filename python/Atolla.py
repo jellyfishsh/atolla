@@ -3,7 +3,7 @@ import botData as data
 
 
 bot = data.getCommandBot()
-guild = data.getPersonalGuild()
+guild = discord.Object(id=1212566775917580398)
 
 #Slash command
 @bot.tree.command(name="hello",description="The essential command", guild=guild)
@@ -15,14 +15,11 @@ async def count(interaction:discord.Interaction, arg: int):
     next = arg + 1
     await interaction.response.send_message(f"Look, I can count as well! The next number is {next}")
 
-@bot.tree.command(name="duck", description="Sends a picture of a duck (or if it doesn't work, just quacks back)")
+@bot.tree.command(name="duck", description="Sends a picture of a duck (or if it doesn't work, just quacks back)", guild=guild)
 async def duck(interaction:discord.Interaction):
-
-
-
     await interaction.response.send_message()
 
-@bot.tree.command(name="ping", description="Sends the bot's latency.")
+@bot.tree.command(name="ping", description="Sends the bot's latency.", guild=guild)
 async def ping(interaction:discord.Interaction):
     await interaction.response.send_message(f"Pong! Latency is {bot.latency}")
 
